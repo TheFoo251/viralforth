@@ -2,8 +2,10 @@
 ViralForth, or `VF`, is a Forth interpreter written in Python. 
 It intends to demonstrate the ease with which Forth can "infect" other bedrock platforms, like a virus.
 
+Clone the repo and run `python vf.py` to try it out.
+
 # Structure
-`VF` uses 3 main files: `vf.py`, `core.pydef`, and `boot.vf`
+`VF` uses 3 main files: `vf.py`, `core.pydef`, and `boot.vf`.
 `vf.py` runs the interpreter loop and reads in a dictionary of "bedrock" words defined as small python blocks in `core.pydef`.
 It then runs `boot.vf`, which is comprised of only valid viralforth words.
 Afterward, the interpreter loop reads directly from standard input.
