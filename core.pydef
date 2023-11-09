@@ -1,0 +1,119 @@
+# Multiline python definitions.
+# Equivalent of native forth's assembly bedrock.
+# May only do stack manipulations --> use the abstraction!
+
+$: print('core initialized!')
+
+# Defines word using a python statement
+# ( -- )
+: DEFINE
+
+name = input('new word:  ')
+definition = input('definition:  ')
+pythondicts[name] = definition
+$$$
+
+
+# Exit viralforth
+# ( -- )
+: EXIT
+exit()
+$$$
+
+
+
+
+
+#####################
+#		MATH		#
+#####################
+
+# adds two numbers
+# (n1 n2 -- n1+n2)
+: +
+n2 = pop()
+n1 = pop()
+push(n1+n2)
+$$$
+
+# subtracts two numbers
+# (n1 n2 -- n1-n2)
+: -
+n2 = pop()
+n1 = pop()
+push(n1-n2)
+$$$
+
+# multiplies two numbers
+# (n1 n2 -- n1*n2)]
+: *
+n2 = pop()
+n1 = pop()
+push(n1*n2)
+$$$
+
+# integer divides two numbers
+# (n1 n2 -- n1/n2)
+: /
+n2 = pop()
+n1 = pop()
+push(n1//n2)
+$$$
+
+#####################
+#		STACK		#
+#####################
+
+# prints stack
+# (n -- )
+: .
+
+print(pop())
+
+$$$
+
+
+# duplicates a value on stack
+# (n -- n n)
+: DUP
+n = pop()
+push(n)
+push(n)
+$$$
+
+
+# swaps two values on stack
+# (n1 n2 -- n2 n1)
+: SWAP
+n2 = pop()
+n1 = pop()
+push(n2)
+push(n1)
+$$$
+
+# copies the lower element on stack and pushes it on top of the upper
+# (n1 n2 -- n1 n2 n1)
+: OVER
+n2 = pop()
+n1 = pop()
+push(n1)
+push(n2)
+push(n1)
+$$$
+
+
+#####################
+#		MISC		#
+#####################
+
+# imports a set of python words given an identifying number
+# (n -- )
+: IMPORT
+
+$$$
+
+## prints the equivalent ASCII character of a number on stack
+# (n -- )
+: EMIT
+print(chr(pop()))
+$$$
