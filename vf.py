@@ -45,7 +45,7 @@ def importdictionary(filename):
     return imported_dict
 
 
-pythondict = importdictionary('core.pydef') | importdictionary('circuit.pydef')
+pythondict = importdictionary('core.pydef')
 forthdict = {}
 ##################################################
 
