@@ -10,38 +10,37 @@
 def importdictionary(filename):
 
     imported_dict = {}
-    pydict = open(filename)
-    readDef = False
+    with open(filename) as pydict:
+        readDef = False
 
-    for line in pydict.readlines():
+        for line in pydict.readlines():
 
-        # Execute statements that start with `$:` directly
-        # Useful for import statements for the module
-        if line.startswith('$:'):
-            exec(line.lstrip("$: "))
+            # Execute statements that start with `$:` directly
+            # Useful for import statements for the module
+            if line.startswith('$:'):
+                exec(line.lstrip("$: "))
         
-        #if a line starts with a colon, it's considered the definition name.
-        #No python code starts a line with a colon
-        if line.startswith(':'):
-            #remove nasty whitespace
-            defname = line.strip(":\t\n ")
-            readDef = True
-            deflines = []
-            continue
+            #if a line starts with a colon, it's considered the definition name.
+            #No python code starts a line with a colon
+            if line.startswith(':'):
+                #remove nasty whitespace
+                defname = line.strip(":\t\n ")
+                readDef = True
+                deflines = []
+                continue
         
-        #The $ symbol is not used in python syntax
-        #$$$ indicates the end of a definition
-        if line == '$$$\n':    
-            readDef = False
-            definition = "\n".join(deflines)
-            imported_dict[defname] = definition
-            continue
+            #The $ symbol is not used in python syntax
+            #$$$ indicates the end of a definition
+            if line == '$$$\n':    
+                readDef = False
+                definition = "\n".join(deflines)
+                imported_dict[defname] = definition
+                continue
 
-        if readDef and not line.startswith('#') and not line.isspace():
-            deflines.append(line)
-            continue
+            if readDef and not line.startswith('#') and not line.isspace():
+                deflines.append(line)
+                continue
 
-    pydict.close()
     return imported_dict
 
 
